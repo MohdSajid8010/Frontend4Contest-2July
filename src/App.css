@@ -1,38 +1,266 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+
+}
+
 .App {
-  text-align: center;
+  border: 1px solid black;
+  padding: 0px 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+body {
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: rgb(24, 23, 23);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.upper-cont {
+  position: relative;
+  display: flex;
+  height: 200px;
+  gap: 70px;
+
+  margin: 50px 0px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.upper-cont .item {
+  position: relative;
+  margin-left: 120px;
+  /* border: 1px solid; */
+  display: flex;
+  background-color: #005c8b;
+  padding-left: 20px;
+}
+
+.upper-cont .item img {
+  position: absolute;
+  top: 0px;
+  left: -120px;
+  height: 107%;
+  width: 150px;
+  transform: rotate(-7deg);
+  border-right: 6px solid white;
+}
+
+.upper-cont .item button {
+  padding: 5px 10px;
+  border: 2px solid white;
+  background-color: #005c8b;
+  outline: none;
+  color: white;
+}
+
+.upper-cont .item .right {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.lower-cont {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 50px;
+  justify-content: center;
+  margin: 50px 0px;
+}
+
+.lower-cont img {
+  width: 170px;
+  height: 190px;
+}
+
+
+.detail-cont {
+  margin-left: 170px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  background-color: #005c8b;
+  color: grey;
+}
+
+.detail-cont .right {
+  padding: 10px 35px;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 10px;
+}
+
+.detail-cont img {
+  position: absolute;
+  left: 0px;
+  width: 180px;
+  height: 220px;
+  transform: rotate(-7deg);
+  border-right: 6px solid white;
+}
+
+.detail-cont .title {
+  font-size: 22px;
+  color: white;
+}
+
+.detail-cont .author {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(201, 195, 195);
+
+}
+
+.detail-cont .rating {
+  display: flex;
+  gap: 20px;
+  color: rgba(226, 226, 226, 1);
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.detail-cont .descript {
+  color: rgb(179, 177, 177);
+}
+
+.detail-cont .btn-cont {
+  display: flex;
+  gap: 20px;
+  align-self: flex-end;
+}
+
+.detail-cont button {
+  border: 1px solid white;
+  color: white;
+  padding: 5px 20px;
+  background-color: #005c8b;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  width: 100%;
+  background-color: black;
+}
+
+.nav img {
+  width: 70px;
+}
+
+.nav .left {
+  display: flex;
+  align-items: center;
+
+}
+
+.nav .mid {
+  display: flex;
+  gap: 20px;
+}
+
+.nav button {
+  padding: 5px 20px;
+  border: none;
+  outline: none;
+  background-color: rgb(76, 75, 75);
+  color: white;
+}
+
+.nav input {
+  padding: 10px;
+  border: none;
+  outline: none;
+  background-color: gray;
+  color: rgb(44, 43, 43);
+  font-size: 17px;
+  color: white;
+  position: relative;
+  padding-left: 40px;
+}
+
+.nav .mid img {
+  background-color: rgb(145, 142, 142);
+  position: absolute;
+  width: 32px;
+  height: 38px;
+  top: 16px;
+  z-index: 10;
+}
+
+.nav .right img {
+  width: 30px;
+}
+
+.nav .right {
+  display: flex;
+  gap: 20px;
+}
+
+.nav .keazon {
+  font-size: 19px;
+}
+
+.nav .keazon~span {
+  color: grey;
+}
+
+#a0 {
+  background-color: #415f71;
+}
+
+#a1 {
+  background-color: #573f71;
+}
+
+#a2 {
+  background-color: #733f54;
+}
+
+#a0 button {
+  background-color: #415f71;
+}
+
+#a1 button {
+  background-color: #573f71;
+}
+
+#a2 button {
+  background-color: #733f54;
+}
+
+@media (max-width:1200px) {
+  .upper-cont {
+    gap: 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .upper-cont .item .right {
+    gap: 10px;
+    padding: 10px 5px;
   }
+
+  .upper-cont .item img {
+    width: 130px;
+  }
+}
+
+@media (max-width:1000px) {
+  .upper-cont {
+    height: 200px;
+    /* flex-direction: column; */
+    gap: 30px;
+    margin-bottom: 340px;
+  }
+
+  .detail-cont .right {
+    padding: 5px 3px;
+    padding-left: 15px;
+    gap: 5px;
+  }
+
 }

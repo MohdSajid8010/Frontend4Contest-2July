@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
 
-const Home = ({ res1, setRes1, res2, setRes2, err, seterror }) => {
+const Home = ({ res1, setRes1, res2, setRes2, res3, setRes3, err, seterror }) => {
 
     // let [res1, setRes1] = useState([]);
     // let [res2, setRes2] = useState([]);
-    let [res3, setRes3] = useState([]);
+    // let [res3, setRes3] = useState([]);
     // let [err, seterror] = useState("");
     let [detailInfoObj, setDetailInfoObj] = useState(null)
 
@@ -14,8 +14,6 @@ const Home = ({ res1, setRes1, res2, setRes2, err, seterror }) => {
     async function request1() {
         axios.get("https://www.googleapis.com/books/v1/volumes?q=harry+potter")
             .then((res) => {
-                // console.log(" req 1")
-                // console.log(res.data.items)
                 let arr = res.data.items.splice(0, 3)
                 setRes1(arr)
                 setRes2(res.data.items);
@@ -28,12 +26,8 @@ const Home = ({ res1, setRes1, res2, setRes2, err, seterror }) => {
     async function request2() {
         axios.get("https://www.googleapis.com/books/v1/volumes?q=Sherlock+Holmes")
             .then((res) => {
-                // console.log(" req 2")
-
-                // console.log(res.data.items)
                 setRes3(res.data.items)
                 // console.log(res.data.items)
-
                 seterror("")
             })
             .catch((err) => seterror(err.message));
@@ -48,8 +42,7 @@ const Home = ({ res1, setRes1, res2, setRes2, err, seterror }) => {
         async function handelAsy() {
             await request1();
             await request2();
-            console.log(res1, res2, res3)
-
+            // console.log(res1, res2, res3)
         };
         handelAsy()
         console.log("inside useEff")
@@ -65,12 +58,11 @@ const Home = ({ res1, setRes1, res2, setRes2, err, seterror }) => {
                             return (
                                 <div className={`item a${i}`} id={`a${i}`} key={`a${i}`} onClick={() => { setDetailInfoObj(obj); setRes1([]) }}>
                                     <div className='left'>
-                                        {console.log(i,obj,obj.volumeInfo.imageLinks.thumbnail)}
-                                        <img src={obj.volumeInfo.imageLinks.thumbnail} alt="book-img" />
+                                        {(obj.volumeInfo.imageLinks && obj.volumeInfo.imageLinks.thumbnail) ? (<img src={obj.volumeInfo.imageLinks.thumbnail} alt="book-img" />) : ("")}
                                     </div>
                                     <div className='right'>
-                                        <div><strong>{obj.volumeInfo.title}</strong></div>
-                                        <div>{obj.volumeInfo.description.slice(0, 62)}</div>
+                                        <div><strong>{obj.volumeInfo.title.slice(0, 25)}</strong></div>
+                                        {obj.volumeInfo.description ? (<div>{obj.volumeInfo.description.slice(0, 52)}</div>) : ("No Description!")}
                                         <button>Now Read!</button>
                                     </div>
                                 </div>
@@ -79,18 +71,15 @@ const Home = ({ res1, setRes1, res2, setRes2, err, seterror }) => {
                     ) : (detailInfoObj) ?
                         (<div className='detail-cont'>
                             <div className='left'>
-                                <img src={detailInfoObj.volumeInfo.imageLinks.thumbnail} />
+                                <img src={detailInfoObj.volumeInfo.imageLinks.thumbnail} alt="book-pic" />
                             </div>
                             <div className='right'>
                                 <div className='title'>{detailInfoObj.volumeInfo.title}</div>
                                 <div className='author'>
-                                    <div>{detailInfoObj.volumeInfo.authors[0]}</div>
+                                    {(detailInfoObj.volumeInfo && detailInfoObj.volumeInfo.authors)?(<div>{detailInfoObj.volumeInfo.authors[0]}</div> ):("N/A")}
                                     <div>Published On: {detailInfoObj.volumeInfo.publishedDate}</div>
                                 </div>
-                                {
-                                    detailInfoObj.volumeInfo.description ?( <div className='descript'>{detailInfoObj.volumeInfo.description.trim().slice(0, 180)}</div>):("No Descriptions!")
-                                }
-                               
+                                {detailInfoObj.volumeInfo.description ? (<div className='descript'>{detailInfoObj.volumeInfo.description.trim().slice(0, 180)}</div>) : ("No Descriptions!")}
 
                                 <div className='rating'>
                                     <div><strong>averageRating:</strong>{detailInfoObj.volumeInfo.averageRating}</div>
@@ -117,7 +106,7 @@ const Home = ({ res1, setRes1, res2, setRes2, err, seterror }) => {
                             return (
                                 <div className='item' key={`b${i}`} onClick={() => { setDetailInfoObj(obj); setRes1([]) }}>
                                     <div className='left'>
-                                        <img src={obj.volumeInfo.imageLinks.thumbnail} alt="book-img" />
+                                        {(obj.volumeInfo.imageLinks && obj.volumeInfo.imageLinks.thumbnail) ? (<img src={obj.volumeInfo.imageLinks.thumbnail} alt="book-img" />) : ("")}
                                     </div>
                                 </div>
                             )
@@ -132,7 +121,7 @@ const Home = ({ res1, setRes1, res2, setRes2, err, seterror }) => {
                             return (
                                 <div className='item' key={`c${i}`} onClick={() => { setDetailInfoObj(obj); setRes1([]) }}>
                                     <div className='left'>
-                                        <img src={obj.volumeInfo.imageLinks.thumbnail} />
+                                        {(obj.volumeInfo.imageLinks && obj.volumeInfo.imageLinks.thumbnail) ? (<img src={obj.volumeInfo.imageLinks.thumbnail} alt="book-img" />) : ("")}
                                     </div>
                                 </div>
                             )
